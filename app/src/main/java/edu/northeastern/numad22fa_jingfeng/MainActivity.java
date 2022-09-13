@@ -2,6 +2,7 @@ package edu.northeastern.numad22fa_jingfeng;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,9 +16,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btn = findViewById(R.id.button);
-        btn.setOnClickListener(view -> {
-            Log.i("MyApp", "This is message");
-            Toast.makeText(getApplicationContext(), "Jing Feng, feng.jing1@northeastern.edu", Toast.LENGTH_SHORT).show();
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity2();
+            }
         });
+    }
+    public void openActivity2(){
+        Intent intent = new Intent(this, Activity2.class);
+        startActivity(intent);
     }
 }
