@@ -22,9 +22,21 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
+        Button button = findViewById(R.id.clickButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity3();
+            }
+        });
     }
     public void openActivity2(){
         Intent intent = new Intent(this, Activity2.class);
+        startActivity(intent);
+    }
+
+    public void openActivity3(){
+        Intent intent = new Intent(this, Activity3.class);
         startActivity(intent);
     }
 }
