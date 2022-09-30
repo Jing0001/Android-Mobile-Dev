@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.129" />
+        <entry key="app/src/main/res/drawable/ic_my_icon.xml" value="0.1145" />
         <entry key="app/src/main/res/layout/activity_2.xml" value="0.17695566813151042" />
-        <entry key="app/src/main/res/layout/activity_3.xml" value="0.40615234375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_3.xml" value="0.17558135986328124" />
+        <entry key="app/src/main/res/layout/activity_4.xml" value="0.4379928588867187" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14295196533203125" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.13125" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.201" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_jf.xml" value="0.201" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_jf_round.xml" value="0.201" />

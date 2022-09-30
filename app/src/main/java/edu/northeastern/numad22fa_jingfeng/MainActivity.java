@@ -29,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
                 openActivity3();
             }
         });
+        Button linkB = findViewById(R.id.linkButton);
+        linkB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity4();
+            }
+        });
     }
     public void openActivity2(){
         Intent intent = new Intent(this, Activity2.class);
@@ -37,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivity3(){
         Intent intent = new Intent(this, Activity3.class);
+        startActivity(intent);
+    }
+
+    public void openActivity4(){
+        Intent intent = new Intent(this, Activity4.class);
         startActivity(intent);
     }
 }
