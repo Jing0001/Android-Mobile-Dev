@@ -1,42 +1,106 @@
 package edu.northeastern.numad22fa_jingfeng;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.hardware.lights.LightState;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Activity4 extends AppCompatActivity {
 
-    ArrayList<String> links;
+    RecyclerView recv;
+    UserAdapter userAdapter;
+    ArrayList<UserData> userLinks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_4);
+//        ArrayList userList = new ArrayList<>();
+        if (savedInstanceState != null && savedInstanceState.containsKey("user_links")) {
+            Log.e("mytest", "in serial");
+            userLinks = (ArrayList<UserData>)savedInstanceState.getSerializable("user_links");
+        } else {
+            Log.e("mytest", "not serial");
+            userLinks = new ArrayList<>();
+        }
 
-        RecyclerView recyclerView;
+        recv = findViewById(R.id.mRecycler);
+        FloatingActionButton addsBtn = findViewById(R.id.fab);
+        userAdapter = new UserAdapter(userLinks, this);
+        recv.setHasFixedSize(true);
+        recv.setLayoutManager(new LinearLayoutManager(this));
+        recv.setAdapter(new UserAdapter(userLinks, this));
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new myAdapter(this, links));
-
-
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        addsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                addInfo();
+//                TextView textView = findViewById(R.id.mSubTitle);
+//                textView.setMovementMethod(LinkMovementMethod.getInstance());
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("user_links", userLinks);
+//        Log.e("mytest", "xxxxxx");
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        savedInstanceState.getSerializable("user_links");
+//        Log.e("mytest", "uyyyyyy");
+    }
+
+    private void addInfo() {
+//        Toast.makeText(this, "test", Toast.LENGTH_LONG).show();
+        LayoutInflater inflter = LayoutInflater.from(this);
+        View v = inflter.inflate(R.layout.add_item, null);
+        EditText userName = v.findViewById(R.id.userName);
+        EditText userLink = v.findViewById(R.id.link);
+        AlertDialog.Builder addDialog = new AlertDialog.Builder(this);
+        addDialog.setView(v);
+        addDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+//                dialog.cancel();
+                String name = userName.getText().toString();
+                String link = userLink.getText().toString();
+                userLinks.add(new UserData(name, link));
+                userAdapter.notifyDataSetChanged();
+
+                dialog.dismiss();
+                Snackbar mySnackbar = Snackbar.make(recv, "Adding Success", Snackbar.LENGTH_SHORT);
+                mySnackbar.show();
+            }
+        });
+        addDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                dialog.dismiss();
+                Snackbar mySnackbar = Snackbar.make(recv, "Cancel", Snackbar.LENGTH_SHORT);
+                mySnackbar.show();
+            }
+        });
+        addDialog.create();
+        addDialog.show();
     }
 }
