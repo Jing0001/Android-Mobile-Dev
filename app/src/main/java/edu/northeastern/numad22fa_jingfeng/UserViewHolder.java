@@ -24,7 +24,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("mytest", "AaAAAAAA");
+//                Log.e("mytest", "AaAAAAAA");
                 String url = link.getText().toString();
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));

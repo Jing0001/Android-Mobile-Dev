@@ -37,4 +37,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     public int getItemCount() {
         return userData.size();
     }
+
+
+//    public UserData getUserDat(int position) {
+//        return userData.get(position);
+//    }
+    public void removeItem(int position) {
+        userData.remove(position);
+        notifyItemRemoved(position);
+    }
 }

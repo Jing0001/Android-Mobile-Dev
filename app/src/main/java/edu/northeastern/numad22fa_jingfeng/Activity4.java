@@ -1,7 +1,9 @@
 package edu.northeastern.numad22fa_jingfeng;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,19 +34,41 @@ public class Activity4 extends AppCompatActivity {
         setContentView(R.layout.activity_4);
 //        ArrayList userList = new ArrayList<>();
         if (savedInstanceState != null && savedInstanceState.containsKey("user_links")) {
-            Log.e("mytest", "in serial");
+//
             userLinks = (ArrayList<UserData>)savedInstanceState.getSerializable("user_links");
         } else {
-            Log.e("mytest", "not serial");
+//            Log.e("mytest", "not serial");
             userLinks = new ArrayList<>();
         }
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(
+                0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+
+//                Log.e("mytest", String.valueOf(viewHolder.getAdapterPosition()));
+//                Log.e("mytest", String.valueOf(userLinks.size()));
+                userLinks.remove(viewHolder.getAdapterPosition());
+//                Log.e("mytest", String.valueOf(userLinks.size()));
+//            userAdapter.removeItem(viewHolder.getAdapterPosition());
+//            userAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+//            userLinks.remove(viewHolder.getBindingAdapterPosition());
+                userAdapter.notifyDataSetChanged();
+            }
+        };
 
         recv = findViewById(R.id.mRecycler);
         FloatingActionButton addsBtn = findViewById(R.id.fab);
         userAdapter = new UserAdapter(userLinks, this);
         recv.setHasFixedSize(true);
         recv.setLayoutManager(new LinearLayoutManager(this));
-        recv.setAdapter(new UserAdapter(userLinks, this));
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recv);
+        recv.setAdapter(userAdapter);
 
         addsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,4 +127,6 @@ public class Activity4 extends AppCompatActivity {
         addDialog.create();
         addDialog.show();
     }
+
+
 }
