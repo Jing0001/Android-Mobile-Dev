@@ -84,14 +84,12 @@ public class Activity4 extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("user_links", userLinks);
-//        Log.e("mytest", "xxxxxx");
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         savedInstanceState.getSerializable("user_links");
-//        Log.e("mytest", "uyyyyyy");
     }
 
     private void addInfo() {

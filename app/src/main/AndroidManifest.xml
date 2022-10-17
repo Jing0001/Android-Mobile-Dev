@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="edu.northeastern.numad22fa_jingfeng">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD22Fa_JingFeng"
         tools:targetApi="31">
+        <activity
+            android:name=".activity6"
+            android:exported="false"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".activity5"
             android:exported="false"

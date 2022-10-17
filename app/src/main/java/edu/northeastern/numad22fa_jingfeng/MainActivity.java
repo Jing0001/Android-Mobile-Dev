@@ -1,16 +1,27 @@
 package edu.northeastern.numad22fa_jingfeng;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import com.google.android.gms.location.LocationRequest;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
+public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +55,18 @@ public class MainActivity extends AppCompatActivity {
                 openActivity5();
             }
         });
+        Button locationBtn = findViewById(R.id.locationBtn);
+        locationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity6();
+            }
+        });
+    }
+
+    private void openActivity6() {
+        Intent intent = new Intent(this, activity6.class);
+        startActivity(intent);
     }
 
     private void openActivity5() {
